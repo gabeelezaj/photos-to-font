@@ -2,6 +2,8 @@
 
 Turn photos (or a webcam snapshot) of your handwriting into an installable `.otf` font. It runs entirely in your browser; nothing is uploaded anywhere.
 
+**Live demo:** https://gabeelezaj.github.io/photos-to-font/
+
 ## Run it
 
 ```sh
