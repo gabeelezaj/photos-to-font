@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Handwriting to Font</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand"><span class="logo">Aa</span>Handwriting → Font</div>
+    <div class="top-actions">
+      <input id="fontName" value="My Handwriting" aria-label="Font name" spellcheck="false">
+      <button id="downloadBtn" class="primary" disabled>Download font (.otf)</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="step">
+      <h2><span class="num">1</span>Add your handwriting</h2>
+      <p class="hint">Print each letter separately (not joined-up cursive) with a dark pen on plain paper. Write some words, then type exactly what you wrote so every letter gets labeled.</p>
+      <div class="add-row">
+        <label id="dropzone" class="dropzone">
+          <input id="fileInput" type="file" accept="image/*" multiple hidden>
+          <strong>Drop photos here</strong><span>or click to choose · you can also paste an image</span>
+        </label>
+        <div class="add-buttons">
+          <button id="webcamBtn">Use webcam</button>
+          <button id="demoBtn" class="ghost">Try a demo</button>
+        </div>
+      </div>
+      <details class="tips">
+        <summary>What should I write?</summary>
+        <p>Together these cover every letter, digit and common punctuation mark. Put them on one page or spread them across several photos:</p>
+        <ol id="suggestionList"></ol>
+        <p>Leave a small gap between letters and a bigger one between words. Keep the page flat and evenly lit, and fill the frame with the writing.</p>
+      </details>
+
+      <div id="webcamPanel" class="webcam" hidden>
+        <div class="cam-stage" id="camStage">
+          <video id="camVideo" playsinline muted></video>
+          <canvas id="camOverlay"></canvas>
+          <div id="camCountdown" class="countdown" hidden></div>
+        </div>
+        <div class="cam-bar">
+          <span id="camStatus" class="muted">Hold your page up to the camera…</span>
+          <label class="check"><input type="checkbox" id="camMirror"> Mirror</label>
+          <button id="camSnap3" class="ghost">Capture in 3 s</button>
+          <button id="camSnap" class="primary">Capture</button>
+          <button id="camClose" class="ghost">Close</button>
+        </div>
+      </div>
+
+      <div id="sources"></div>
+    </section>
+
+    <section class="step">
+      <h2><span class="num">2</span>Check the letters</h2>
+      <p class="hint">Fix wrong labels by typing in the box under a letter; clear the box to leave a shape out. Click tiles to select them, then merge pieces of one letter or split letters that touch.</p>
+      <div class="toolbar">
+        <button id="mergeBtn" disabled>Merge</button>
+        <button id="splitBtn" disabled>Split</button>
+        <button id="deleteBtn" disabled>Delete</button>
+        <button id="clearSelBtn" class="ghost" disabled>Clear selection</button>
+        <span class="legend"><i class="ok"></i>matched <i class="fix"></i>check this <i class="none"></i>unlabeled</span>
+      </div>
+      <div id="tiles"><p class="empty">Letters appear here after you add a photo.</p></div>
+    </section>
+
+    <section class="step">
+      <h2><span class="num">3</span>Your alphabet</h2>
+      <p class="hint">A counter means you wrote that character more than once; click it to pick which version goes in the font. <span id="alphaSummary"></span></p>
+      <div id="alphabet" class="alphabet"></div>
+    </section>
+
+    <section class="step">
+      <h2><span class="num">4</span>Try it out</h2>
+      <div class="controls">
+        <label>Stroke weight <input type="range" id="weight" min="-100" max="100" value="0"></label>
+        <label>Letter spacing <input type="range" id="spacing" min="-40" max="200" value="40"></label>
+        <label>Word spacing <input type="range" id="space" min="100" max="700" value="300"></label>
+        <label>Preview size <input type="range" id="previewSize" min="16" max="120" value="48"></label>
+        <label class="check"><input type="checkbox" id="fillCase" checked> Fill missing capitals or lowercase from the other case</label>
+      </div>
+      <textarea id="preview" class="hw preview" spellcheck="false">The quick brown fox jumps over the lazy dog.
+Pack my box with five dozen liquor jugs! 0123456789</textarea>
+    </section>
+  </main>
+
+  <script src="js/vendor/opentype.min.js"></script>
+  <script src="js/imageproc.js"></script>
+  <script src="js/segment.js"></script>
+  <script src="js/trace.js"></script>
+  <script src="js/fontbuild.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
